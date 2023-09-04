@@ -59,7 +59,7 @@ function load_stopwords(lang; path=DATA_PATH)
 end
 
 """
-`stopwords` is a lazy dictionary of stop words for many languages. 
+`stopwords` is a lazy dictionary of stop words for multiple languages. 
 You can access the stop words for a given language using the language's name or ISO 639 code.
 For example, to get the stop words for English, you can use `stopwords["eng"]`, `stopwords["en"]`, or `stopwords["English"]`.
 """
