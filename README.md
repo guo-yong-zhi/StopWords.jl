@@ -7,7 +7,7 @@ This julia package contains a collection of stop words for multiple languages. T
 import Pkg; Pkg.add("StopWords")
 ```
 # Usage
-This package exports a single object `stopwords`. `stopwords` can be regarded as a lazy dictionary of stop words for multiple languages. You can access the stop words for a given language using the language name or [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code.
+This package exports a single object `stopwords`. The `stopwords` can be regarded as a lazy dictionary of stop words for multiple languages. You can access the stop words for a given language using the language name or [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code.
 For example, to get the stop words for English, you can use `stopwords["eng"]`, `stopwords["en"]`, or `stopwords["English"]`.
 ```julia
 julia> using StopWords

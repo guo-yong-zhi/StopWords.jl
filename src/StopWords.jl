@@ -85,7 +85,7 @@ And `haskey(stopwords, ["en", "fr"])` returns `true` if both English and French 
 function Base.haskey(sw::StopWordsDict, lang::String)
     haskey(sw.dict, lang) || lang in sw.languages || normcode(lang) in sw.languages
 end
-Base.haskey(sw::StopWordsDict, langs) = all(haskey(sw, lang) for lang in langs)
+Base.haskey(sw::StopWordsDict, langs) = haskey(sw.dict2, langs) || all(haskey(sw, lang) for lang in langs)
 Base.haskey(sw::StopWordsDict, c::Colon=:) = true
 
 function load_stopwords(lang; path=DATA_PATH)
