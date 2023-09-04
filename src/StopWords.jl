@@ -104,7 +104,7 @@ And to get the stop words for multiple languages, you can use a list, e.g. `stop
 const stopwords = StopWordsDict(DATA_PATH)
 
 """
-    supported_languages() -> Vector{String}
+    supported_languages() -> Set{String}
 
 Return a set containing all the languages (ISO 639-3 codes) that are supported by this package. 
 """
