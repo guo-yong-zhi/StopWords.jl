@@ -40,6 +40,13 @@ function Base.getindex(sw::StopWordsDict, lang::String)
         end
     end
 end
+
+"""
+    haskey(sw::StopWordsDict, lang::String) -> Bool
+
+Check if `lang` is a supported language. You can use either the language's name or its ISO 639 code.
+For example, `haskey(stopwords, "en")`, `haskey(stopwords, "eng")`, and `haskey(stopwords, "English")` all return `true`.
+"""
 function Base.haskey(sw::StopWordsDict, lang::String)
     haskey(sw.dict, lang) || lang in sw.languages || normcode(lang) in sw.languages
 end
@@ -51,10 +58,15 @@ function load_stopwords(lang; path=DATA_PATH)
     end
 end
 
+"""
+`stopwords` is a lazy dictionary of stop words for many languages. 
+You can access the stop words for a given language using the language's name or ISO 639 code.
+For example, to get the stop words for English, you can use `stopwords["eng"]`, `stopwords["en"]`, or `stopwords["English"]`.
+"""
 const stopwords = StopWordsDict(DATA_PATH)
 
 """
-supported_languages() -> Vector{String}
+    supported_languages() -> Vector{String}
 
 Return a vector containing all the languages (ISO 639-3 codes) that are supported by this package. 
 """
