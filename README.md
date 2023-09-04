@@ -29,3 +29,26 @@ stopwords["eng"] === stopwords["en"] === stopwords["English"]
 ```julia
 true
 ```
+You can also get the stop words for multiple languages at once.
+```julia
+stopwords[["eng", "fra"]]
+```
+```julia
+Set{String} with 1922 elements:
+  "nu"
+  "youd"
+  "ont"
+  "pfut"
+  "whoever"
+  "shouldn"
+  "enfin"
+  "tac"
+  ⋮ 
+```
+```julia
+stopwords[["eng", "fra"]] == stopwords["eng"] ∪ stopwords["fra"]
+```
+```julia
+true
+```
+You can use 
