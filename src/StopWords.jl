@@ -6,15 +6,15 @@ export stopwords
 const PACKAGE_PATH = pkgdir(StopWords)
 const DATA_PATH = joinpath(PACKAGE_PATH, "stopwords")
 
-struct StopWordsDict <: AbstractDict{Any, Set{String}}
-    dict::Dict{String, Set{String}}
-    dict2::Dict{Any, Set{String}}
+struct StopWordsDict <: AbstractDict{Any,Set{String}}
+    dict::Dict{String,Set{String}}
+    dict2::Dict{Any,Set{String}}
     languages::Set{String}
     path::String
 end
 function StopWordsDict(path=DATA_PATH)
     languages = Set([f[1:end-4] for f in readdir(path)])
-    return StopWordsDict(Dict{String, Set{String}}(), Dict{Any, Set{String}}(),languages, path)
+    return StopWordsDict(Dict{String,Set{String}}(), Dict{Any,Set{String}}(), languages, path)
 end
 function Base.iterate(sw::StopWordsDict, st=(1, nothing))
     if first(st) == 1
