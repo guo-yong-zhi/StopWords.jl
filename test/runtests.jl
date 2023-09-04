@@ -14,13 +14,13 @@ using Test
     @test haskey(stopwords, ["zh"])
     @test haskey(stopwords, ["zh", "French"])
     @test haskey(stopwords, Set(["zh", "French"]))
-    @test haskey(stopwords, ("zh", "French", "zho"))
+    @test haskey(stopwords, ("zh-cn", "French", "zho"))
     @test haskey(stopwords, :)
     @test !haskey(stopwords, "balabala")
     @test !haskey(stopwords, ["balabala", "French"])
     @test !haskey(stopwords, Set(["balabala", "French"]))
     @test !haskey(stopwords, ("balabala", "French"))
-    @test stopwords[["en", "Chinese"]] === stopwords[["zho", "eng"]] === stopwords[Set(["zh", "English"])] === stopwords[("Chinese", "English")]
+    @test stopwords[["en", "Chinese"]] === stopwords[["zho", "eng"]] === stopwords[Set(["zh-cn", "English"])] === stopwords[("Chinese", "English")]
     @test stopwords[["en", "French"]] == stopwords["French"] ∪ stopwords["English"]
     @test stopwords[["en", "eng", "en"]] === stopwords["English"] === stopwords[["eng"]] === stopwords[Set(["en"])]
     println(keys(stopwords))
