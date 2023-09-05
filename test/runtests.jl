@@ -1,13 +1,21 @@
 using StopWords
 using Test
 @testset "StopWords.jl" begin
-    @test length(StopWords.supported_languages()) == 57
+    langs = collect(StopWords.supported_languages())
+    @test length(langs) == 57
+    @test all(StopWords.normcode.(langs) .== langs)
+    @test all(l in StopWords.id_all for l in langs)
     @test isempty(stopwords)
     println(stopwords)
     @test stopwords["en"] === stopwords["eng"] === stopwords["English"]
     @test stopwords["fra"] === stopwords["fra"] === stopwords["French"] === stopwords["fr"]
     @test !isempty(stopwords["zh"])
     @test !isempty(stopwords)
+    @test get(stopwords, "jpn") === stopwords["jpn"]
+    @test get(stopwords, "foo", 1234) == 1234
+    @test get(stopwords, "bar") do 
+        Set(["a", "b"])
+    end == Set(["a", "b"])
     @test haskey(stopwords, "en")
     @test haskey(stopwords, "French")
     @test haskey(stopwords, "zho")

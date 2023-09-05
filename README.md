@@ -1,14 +1,13 @@
 # StopWords.jl
 [![docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://guo-yong-zhi.github.io/StopWords.jl/dev) [![CI](https://github.com/guo-yong-zhi/StopWords.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/guo-yong-zhi/StopWords.jl/actions/workflows/ci.yml) [![CI-nightly](https://github.com/guo-yong-zhi/StopWords.jl/actions/workflows/ci-nightly.yml/badge.svg)](https://github.com/guo-yong-zhi/StopWords.jl/actions/workflows/ci-nightly.yml) [![codecov](https://codecov.io/gh/guo-yong-zhi/StopWords.jl/graph/badge.svg?token=tolYlABD6o)](https://codecov.io/gh/guo-yong-zhi/StopWords.jl)
 
-This julia package contains a collection of stop words for multiple languages. The data is sourced from: https://github.com/stopwords-iso/stopwords-iso
+[Stop words](https://en.wikipedia.org/wiki/Stop_word) are the words in a negative dictionary which are filtered out before or after processing of natural language data (text) because they are insignificant. This julia package contains a collection of stop words for multiple languages. The data is sourced from: <https://github.com/stopwords-iso/stopwords-iso>.
 # Installation
 ```julia
 import Pkg; Pkg.add("StopWords")
 ```
 # Usage
-This package exports a single object `stopwords`. The `stopwords` can be regarded as a lazy dictionary of stop words for multiple languages. You can access the stop words for a given language using the language name or [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code.
-For example, to get the stop words for English, you can use `stopwords["eng"]`, `stopwords["en"]`, or `stopwords["English"]`.
+The `stopwords` variable is the only exported symbol of this package. It can be regarded as a lazy dictionary of stop words for multiple languages. You can access the stop words for a given language using the language name or [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code. For example, to get the stop words for English, you can use `stopwords["eng"]`, `stopwords["en"]`, or `stopwords["English"]`.
 ```julia
 julia> using StopWords
 julia> stopwords["eng"]

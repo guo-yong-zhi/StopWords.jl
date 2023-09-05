@@ -74,6 +74,10 @@ function Base.getindex(sw::StopWordsDict, langs)
     end
 end
 Base.getindex(sw::StopWordsDict, c::Colon=:) = sw[supported_languages(sw)]
+Base.get(sw::StopWordsDict, ind) = sw[ind]
+Base.get(sw::StopWordsDict, ind, default) = haskey(sw, ind) ? sw[ind] : default
+Base.get(default::Union{Function, Type}, sw::StopWordsDict, ind) = haskey(sw, ind) ? sw[ind] : default()
+
 """
     haskey(sw::StopWordsDict, lang::String) -> Bool
     haskey(sw::StopWordsDict, langs) -> Bool
