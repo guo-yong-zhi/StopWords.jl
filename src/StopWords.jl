@@ -57,11 +57,12 @@ function Base.getindex(sw::StopWordsDict, lang::String)
         end
     end
 end
+Base.getindex(sw::StopWordsDict, lang::AbstractString) = sw[String(lang)]
 function Base.getindex(sw::StopWordsDict, langs)
     if haskey(sw.dict2, langs)
         return sw.dict2[langs]
     else
-        norm_langs = sort(unique([normcode(lang) for lang in langs]))
+        norm_langs = sort(unique([String(normcode(lang)) for lang in langs]))
         if haskey(sw.dict2, norm_langs)
             return sw.dict2[langs] = sw.dict2[norm_langs]
         else
@@ -79,7 +80,7 @@ Base.get(sw::StopWordsDict, ind, default) = haskey(sw, ind) ? sw[ind] : default
 Base.get(default::Union{Function, Type}, sw::StopWordsDict, ind) = haskey(sw, ind) ? sw[ind] : default()
 
 """
-    haskey(sw::StopWordsDict, lang::String) -> Bool
+    haskey(sw::StopWordsDict, lang::AbstractString) -> Bool
     haskey(sw::StopWordsDict, langs) -> Bool
 
 Check if `lang` is a supported language. You can use either the language's name or its ISO 639 code.
@@ -89,7 +90,8 @@ And `haskey(stopwords, ["en", "fr"])` returns `true` if both English and French 
 function Base.haskey(sw::StopWordsDict, lang::String)
     haskey(sw.dict, lang) || lang in sw.languages || normcode(lang) in sw.languages
 end
-Base.haskey(sw::StopWordsDict, langs) = haskey(sw.dict2, langs) || all(haskey(sw, lang) for lang in langs)
+Base.haskey(sw::StopWordsDict, lang::AbstractString) = haskey(sw, String(lang))
+Base.haskey(sw::StopWordsDict, langs) = haskey(sw.dict2, langs) || all(haskey(sw, lang::AbstractString) for lang in langs)
 Base.haskey(sw::StopWordsDict, c::Colon=:) = true
 
 function load_stopwords(lang; path=DATA_PATH)

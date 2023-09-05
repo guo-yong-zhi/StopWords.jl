@@ -33,4 +33,9 @@ using Test
     @test stopwords[["en", "eng", "en"]] === stopwords["English"] === stopwords[["eng"]] === stopwords[Set(["en"])]
     println(keys(stopwords))
     @test stopwords[] === stopwords[:] === stopwords[StopWords.supported_languages()]
+
+    substr = @view "eng"[1:3]
+    @test haskey(stopwords, [substr])
+    @test haskey(stopwords, substr)
+    @test get(stopwords, substr) === stopwords["eng"] === stopwords[[substr, "eng"]]
 end
