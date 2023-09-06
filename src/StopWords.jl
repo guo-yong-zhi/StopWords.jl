@@ -16,24 +16,12 @@ function StopWordsDict(path=DATA_PATH)
     languages = Set([f[1:end-4] for f in readdir(path)])
     return StopWordsDict(Dict{String,Set{String}}(), Dict{Any,Set{String}}(), languages, path)
 end
-function Base.iterate(sw::StopWordsDict, st=(1, nothing))
-    if first(st) == 1
-        res = last(st) === nothing ? iterate(sw.dict) : iterate(sw.dict, last(st))
-        if res !== nothing
-            v, s = res
-            return v, (1, s)
-        else
-            return iterate(sw, (2, nothing))
-        end
-    else
-        res = last(st) === nothing ? iterate(sw.dict2) : iterate(sw.dict2, last(st))
-        if res !== nothing
-            v, s = res
-            return v, (2, s)
-        else
-            return nothing
-        end
-    end
+function Base.iterate(sw::StopWordsDict, state=(1, nothing))
+    its = (sw.dict, sw.dict2)
+    ind, st = state
+    ind > length(its) && return nothing
+    res = st === nothing ? iterate(its[ind]) : iterate(its[ind], st)
+    res === nothing ? iterate(sw, (ind+1, nothing)) : (res[1], (ind, res[2]))
 end
 function Base.length(sw::StopWordsDict)
     length(sw.dict) + length(sw.dict2)
@@ -69,7 +57,7 @@ function Base.getindex(sw::StopWordsDict, langs)
             if length(norm_langs) == 1
                 return sw.dict2[langs] = sw.dict2[norm_langs] = sw[norm_langs[1]]
             else
-                return sw.dict2[langs] = sw.dict2[norm_langs] = union([sw[lang] for lang in norm_langs]...)
+                return sw.dict2[langs] = sw.dict2[norm_langs] = union((sw[lang] for lang in norm_langs)...)
             end
         end
     end

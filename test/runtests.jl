@@ -38,4 +38,5 @@ using Test
     @test haskey(stopwords, [substr])
     @test haskey(stopwords, substr)
     @test get(stopwords, substr) === stopwords["eng"] === stopwords[[substr, "eng"]]
+    @test length(collect(stopwords)) == length(stopwords) #test iterate
 end
