@@ -1,7 +1,8 @@
 # StopWords.jl
 [![docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://guo-yong-zhi.github.io/StopWords.jl/dev) [![CI](https://github.com/guo-yong-zhi/StopWords.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/guo-yong-zhi/StopWords.jl/actions/workflows/ci.yml) [![CI-nightly](https://github.com/guo-yong-zhi/StopWords.jl/actions/workflows/ci-nightly.yml/badge.svg)](https://github.com/guo-yong-zhi/StopWords.jl/actions/workflows/ci-nightly.yml) [![codecov](https://codecov.io/gh/guo-yong-zhi/StopWords.jl/graph/badge.svg?token=tolYlABD6o)](https://codecov.io/gh/guo-yong-zhi/StopWords.jl)
 
-[Stop words](https://en.wikipedia.org/wiki/Stop_word) are the words in a negative dictionary which are filtered out before or after processing of natural language data (text) because they are insignificant. This julia package contains a collection of stop words for multiple languages. The data is sourced from: <https://github.com/stopwords-iso/stopwords-iso>.
+[Stop words](https://en.wikipedia.org/wiki/Stop_word) are the words in a negative dictionary which are filtered out before or after processing of natural language data (text) because they are insignificant. This julia package contains a collection of stop words for multiple languages. The data is sourced from: <https://github.com/stopwords-iso/stopwords-iso>. Currently, this package supports 57 languages, identified by their [ISO 639-3](https://en.wikipedia.org/wiki/ISO_639_macrolanguage) codes:
+> afr ara ben bre bul cat ces dan deu ell eng epo est eus fas fin fra gle glg guj hau hbs heb hin hun hye ita jpn kor kur lat lav lit mar msa nld nor pol por ron rus slk slv som sot spa swa swe tgl tha tur ukr urd vie yor zho zul
 # Installation
 ```julia
 import Pkg; Pkg.add("StopWords")
