@@ -7,7 +7,14 @@ using Test
     @test all(l in StopWords.id_all for l in langs)
     @test isempty(stopwords)
     println(stopwords)
+    @test StopWords.normcode("english") == "eng"
+    @test StopWords.normcode("asdfghjkl") == "asdfghjkl"
+    @test StopWords.normcode("as dfg-hjkl") == "as dfg-hjkl"
+    for (k,v) in StopWords.name_id
+        @test StopWords.normcode(k) == v
+    end
     @test stopwords["en"] === stopwords["eng"] === stopwords["English"]
+    @test stopwords["ENGLISH"] === stopwords["english"] === stopwords["EnGlIsH"]
     @test stopwords["fra"] === stopwords["fra"] === stopwords["French"] === stopwords["fr"]
     @test !isempty(stopwords["zh"])
     @test !isempty(stopwords)
