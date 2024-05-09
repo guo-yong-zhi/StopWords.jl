@@ -46,4 +46,11 @@ using Test
     @test haskey(stopwords, substr)
     @test get(stopwords, substr) === stopwords["eng"] === stopwords[[substr, "eng"]]
     @test length(collect(stopwords)) == length(stopwords) #test iterate
+
+    stopwords["mylang"] = Set(["a", "b"])
+    @test haskey(stopwords, "mylang")
+    @test stopwords["mylang"] == Set(["a", "b"])
+    stopwords[(1, 2)] = Set([""])
+    @test haskey(stopwords, (1, 2))
+    @test stopwords[(1, 2)] == Set([""])
 end
